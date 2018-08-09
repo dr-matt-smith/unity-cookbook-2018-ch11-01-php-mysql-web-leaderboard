@@ -8,8 +8,7 @@ class PlayerRepository
 
     public function __construct()
     {
-//        $db = new Database();
-        $db = new DatabaseSqlite();
+        $db = new Database();
         $this->connection = $db->getConnection();
     }
 
@@ -35,31 +34,20 @@ class PlayerRepository
 
     public function dropTable()
     {
-        $sql = "DROP TABLE IF EXISTS player";
+        $sql = 'DROP TABLE IF EXISTS player';
         $this->connection->exec($sql);
     }
 
     public function createTable()
     {
-        // drop table if it already exists
-        // (removing all old data)
-        $this->dropTable();
-
-//        $sql = "
-//            CREATE TABLE `player` (
-//              `id` INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//              `username` varchar(25) NOT NULL,
-//              `score` INTEGER NOT NULL
-//              )
-//        ";
 
         $sql = '
-            CREATE TABLE player (
-              id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-              username varchar(25) NOT NULL,
-              score INTEGER NOT NULL
-              )
-        ';
+                CREATE TABLE IF NOT EXISTS  player (
+                  id INTEGER PRIMARY KEY,
+                  username varchar(25) NOT NULL,
+                  score INTEGER NOT NULL
+                  )
+            ';
 
         $this->connection->exec($sql);
     }

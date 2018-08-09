@@ -50,4 +50,16 @@ class Player
     public function toJson() {
         return json_encode($this->toArray());
     }
+
+
+    public function __toString()
+    {
+        $text = '';
+        $text .= '<hr>';
+        $text .= '<br>Id: ' . $this->getId();
+        $text .= '<br>Username: ' . $this->getUsername();
+        $text .= '<br>Score: ' . $this->getScore();
+
+        return $text;
+    }
 }
